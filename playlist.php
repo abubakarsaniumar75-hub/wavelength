@@ -10,7 +10,7 @@ if ($playlistId <= 0) {
 
 try {
 
-    // Get playlist details
+
     $playlistStmt = $pdo->prepare(
         "SELECT
             playlists.playlist_id,
@@ -30,8 +30,6 @@ try {
         die("Playlist not found.");
     }
 
-
-    // Get tracks in the playlist
     $trackStmt = $pdo->prepare(
         "SELECT
             tracks.track_id,
@@ -70,8 +68,6 @@ try {
 
     $totalSeconds = (int)$durationStmt->fetchColumn();
 
-
-    // Convert seconds to minutes and seconds
     $minutes = floor($totalSeconds / 60);
     $seconds = $totalSeconds % 60;
 
@@ -102,7 +98,7 @@ try {
 
 <div class="max-w-5xl mx-auto p-6">
 
-    <!-- Header -->
+  
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -115,8 +111,6 @@ try {
 
     </div>
 
-
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -145,9 +139,6 @@ try {
         </a>
 
     </nav>
-
-
-    <!-- Playlist Details -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h2 class="text-xl font-semibold">
@@ -171,9 +162,6 @@ try {
         </p>
 
     </div>
-
-
-    <!-- Tracks -->
     <div class="bg-white border rounded-lg p-5">
 
         <h2 class="text-xl font-semibold mb-4">

@@ -10,7 +10,6 @@ if ($artistId <= 0) {
 
 try {
 
-    // Get artist information
     $artistStmt = $pdo->prepare(
         "SELECT artist_id, name, country
          FROM artists
@@ -26,7 +25,6 @@ try {
     }
 
 
-    // Get albums and number of tracks
     $albumStmt = $pdo->prepare(
         "SELECT
             albums.album_id,
@@ -54,7 +52,6 @@ try {
     $albums = $albumStmt->fetchAll();
 
 
-    // Get total streams
     $streamStmt = $pdo->prepare(
         "SELECT COALESCE(SUM(tracks.stream_count), 0)
          FROM tracks
@@ -94,7 +91,6 @@ try {
 
 <div class="max-w-5xl mx-auto p-6">
 
-    <!-- Header -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -107,8 +103,6 @@ try {
 
     </div>
 
-
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -134,7 +128,6 @@ try {
     </nav>
 
 
-    <!-- Artist Information -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h2 class="text-xl font-semibold mb-3">
@@ -157,8 +150,6 @@ try {
 
     </div>
 
-
-    <!-- Albums -->
     <div class="bg-white border rounded-lg p-5">
 
         <h2 class="text-xl font-semibold mb-4">

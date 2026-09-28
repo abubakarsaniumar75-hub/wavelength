@@ -10,7 +10,6 @@ if ($trackId <= 0) {
 
 try {
 
-    // Get the track
     $stmt = $pdo->prepare(
         "SELECT track_id, title
          FROM tracks
@@ -26,7 +25,6 @@ try {
     }
 
 
-    // Delete only after POST confirmation
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $delete = $pdo->prepare(
@@ -38,7 +36,6 @@ try {
 
         if ($delete->rowCount() > 0) {
 
-            // Go back to dashboard
             header("Location: index.php");
             exit;
 

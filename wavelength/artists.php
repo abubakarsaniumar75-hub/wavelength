@@ -5,7 +5,7 @@ $search = trim($_GET['search'] ?? '');
 $country = $_GET['country'] ?? '';
 
 try {
-    // Get countries for the dropdown
+
     $countryStmt = $pdo->query("
         SELECT DISTINCT country
         FROM artists
@@ -15,7 +15,6 @@ try {
 
     $countries = $countryStmt->fetchAll();
 
-    // Build the artist query
     $sql = "
         SELECT artist_id, name, country
         FROM artists
@@ -24,13 +23,11 @@ try {
 
     $params = [];
 
-    // Search by artist name
     if ($search !== '') {
         $sql .= " AND name LIKE ?";
         $params[] = "%$search%";
     }
 
-    // Filter by country
     if ($country !== '') {
         $sql .= " AND country IN (?)";
         $params[] = $country;
@@ -63,7 +60,6 @@ try {
 
 <body class="bg-slate-950 text-white min-h-screen">
 
-<!-- Navigation -->
 <nav class="border-b border-slate-800 bg-slate-950">
 
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -107,7 +103,6 @@ try {
 </nav>
 
 
-<!-- Main -->
 <main class="max-w-7xl mx-auto px-6 py-12">
 
     <div class="mb-10">
@@ -127,14 +122,12 @@ try {
     </div>
 
 
-    <!-- Search and Filter -->
     <form method="GET"
           action="artists.php"
           class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-8">
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-            <!-- Search -->
             <div class="md:col-span-2">
 
                 <label for="search"
@@ -153,9 +146,6 @@ try {
                 >
 
             </div>
-
-
-            <!-- Country -->
             <div>
 
                 <label for="country"
@@ -212,8 +202,6 @@ try {
 
     </form>
 
-
-    <!-- Error -->
     <?php if (isset($error)): ?>
 
         <div class="bg-red-950 border border-red-800 text-red-300 rounded-xl p-4 mb-6">
@@ -222,8 +210,6 @@ try {
 
     <?php endif; ?>
 
-
-    <!-- Artists Table -->
     <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
 
         <div class="overflow-x-auto">

@@ -69,13 +69,11 @@ try {
 
     <div class="max-w-5xl mx-auto p-6">
 
-        <!-- Header -->
         <div class="bg-white border rounded-lg p-5 mb-5">
             <h1 class="text-2xl font-bold">Wavelength</h1>
             <p class="text-gray-500">Music Library Manager</p>
         </div>
 
-        <!-- Navigation -->
         <nav class="bg-white border rounded-lg p-4 mb-5">
 
             <a href="index.php"
@@ -105,14 +103,11 @@ try {
 
         </nav>
 
-        <!-- Dashboard -->
         <div class="bg-white border rounded-lg p-5">
 
             <h2 class="text-xl font-semibold mb-4">
                 Dashboard
             </h2>
-
-            <!-- Statistics -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
 
                 <div class="border rounded p-4">
@@ -145,7 +140,6 @@ try {
 
             </div>
 
-            <!-- Other information -->
             <h3 class="font-semibold mb-2">
                 Library Information
             </h3>

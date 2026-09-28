@@ -7,7 +7,6 @@ $error = '';
 
 try {
 
-    // Get all albums for the dropdown
     $albumStmt = $pdo->query(
         "SELECT
             albums.album_id,
@@ -21,8 +20,6 @@ try {
 
     $albums = $albumStmt->fetchAll();
 
-
-    // Handle form submission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $title = trim($_POST['title'] ?? '');
@@ -30,13 +27,10 @@ try {
         $streamCount = $_POST['stream_count'] ?? 0;
         $albumId = (int)($_POST['album_id'] ?? 0);
 
-
-        // Validate title
         if ($title === '') {
             $error = "Track title is required.";
         }
 
-        // Validate duration
         elseif (
             !filter_var(
                 $duration,
@@ -46,15 +40,12 @@ try {
         ) {
             $error = "Duration must be a positive number.";
         }
-
-        // Validate album
         elseif ($albumId <= 0) {
             $error = "Please select an album.";
         }
 
         else {
 
-            // Check that the album exists
             $checkAlbum = $pdo->prepare(
                 "SELECT album_id
                  FROM albums
@@ -69,7 +60,6 @@ try {
 
             } else {
 
-                // Validate streams
                 $streamCount = filter_var(
                     $streamCount,
                     FILTER_VALIDATE_INT
@@ -78,8 +68,6 @@ try {
                 if ($streamCount === false || $streamCount < 0) {
                     $error = "Stream count must be 0 or greater.";
                 } else {
-
-                    // Insert track
                     $insert = $pdo->prepare(
                         "INSERT INTO tracks
                         (title, duration_seconds, stream_count, album_id)
@@ -98,8 +86,6 @@ try {
                     $message =
                         "Track added successfully. Track ID: "
                         . $newTrackId;
-
-                    // Clear form values
                     $title = '';
                     $duration = '';
                     $streamCount = 0;
@@ -134,7 +120,6 @@ try {
 
 <div class="max-w-3xl mx-auto p-6">
 
-    <!-- Header -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -146,9 +131,6 @@ try {
         </p>
 
     </div>
-
-
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -178,8 +160,6 @@ try {
 
     </nav>
 
-
-    <!-- Form -->
     <div class="bg-white border rounded-lg p-5">
 
         <h2 class="text-xl font-semibold mb-4">
@@ -187,7 +167,6 @@ try {
         </h2>
 
 
-        <!-- Success message -->
 
         <?php if ($message !== ''): ?>
 
@@ -199,9 +178,6 @@ try {
             </div>
 
         <?php endif; ?>
-
-
-        <!-- Error message -->
 
         <?php if ($error !== ''): ?>
 
@@ -216,9 +192,6 @@ try {
 
 
         <form method="POST">
-
-
-            <!-- Track title -->
 
             <div class="mb-4">
 
@@ -236,9 +209,6 @@ try {
                 >
 
             </div>
-
-
-            <!-- Duration -->
 
             <div class="mb-4">
 
@@ -258,9 +228,6 @@ try {
 
             </div>
 
-
-            <!-- Stream count -->
-
             <div class="mb-4">
 
                 <label class="block font-medium mb-1">
@@ -276,9 +243,6 @@ try {
                 >
 
             </div>
-
-
-            <!-- Album -->
 
             <div class="mb-5">
 
@@ -317,9 +281,6 @@ try {
                 </select>
 
             </div>
-
-
-            <!-- Submit -->
 
             <button
                 type="submit"

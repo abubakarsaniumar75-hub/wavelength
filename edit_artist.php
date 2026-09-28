@@ -13,7 +13,6 @@ $error = '';
 
 try {
 
-    // Get the artist
     $stmt = $pdo->prepare(
         "SELECT artist_id, name, country
          FROM artists
@@ -29,7 +28,6 @@ try {
     }
 
 
-    // Handle update
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $name = trim($_POST['name'] ?? '');
@@ -41,7 +39,6 @@ try {
 
         } else {
 
-            // Convert empty country to NULL
             $countryValue = $country === '' ? null : $country;
 
             $update = $pdo->prepare(
@@ -66,7 +63,6 @@ try {
 
             }
 
-            // Update displayed values
             $artist['name'] = $name;
             $artist['country'] = $countryValue;
         }
@@ -97,8 +93,6 @@ try {
 
 <div class="max-w-3xl mx-auto p-6">
 
-    <!-- Header -->
-
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -110,9 +104,6 @@ try {
         </p>
 
     </div>
-
-
-    <!-- Navigation -->
 
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
@@ -138,17 +129,11 @@ try {
 
     </nav>
 
-
-    <!-- Edit Form -->
-
     <div class="bg-white border rounded-lg p-5">
 
         <h2 class="text-xl font-semibold mb-4">
             Edit Artist
         </h2>
-
-
-        <!-- Success -->
 
         <?php if ($message !== ''): ?>
 
@@ -160,10 +145,6 @@ try {
             </div>
 
         <?php endif; ?>
-
-
-        <!-- Error -->
-
         <?php if ($error !== ''): ?>
 
             <div class="bg-red-50 border border-red-300
@@ -178,8 +159,6 @@ try {
 
         <form method="POST">
 
-            <!-- Keep artist ID -->
-
             <input
                 type="hidden"
                 name="artist_id"
@@ -187,7 +166,6 @@ try {
             >
 
 
-            <!-- Artist name -->
 
             <div class="mb-4">
 
@@ -204,9 +182,6 @@ try {
                 >
 
             </div>
-
-
-            <!-- Country -->
 
             <div class="mb-5">
 

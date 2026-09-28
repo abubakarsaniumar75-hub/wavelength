@@ -19,7 +19,6 @@ if (!in_array($sort, $allowedSorts, true)) {
 
 try {
 
-    // Get available genres
     $genreStmt = $pdo->query(
         "SELECT DISTINCT genre
          FROM albums
@@ -29,7 +28,6 @@ try {
 
     $genres = $genreStmt->fetchAll();
 
-    // Main albums query
     $sql = "
         SELECT
             albums.album_id,
@@ -45,7 +43,6 @@ try {
 
     $params = [];
 
-    // Year range
     if ($minYear !== '' && is_numeric($minYear)) {
         $sql .= " AND albums.release_year >= ?";
         $params[] = (int)$minYear;
@@ -56,13 +53,11 @@ try {
         $params[] = (int)$maxYear;
     }
 
-    // Genre filter
     if ($genre !== '') {
         $sql .= " AND albums.genre IN (?)";
         $params[] = $genre;
     }
 
-    // Sorting
     $sql .= " ORDER BY albums.$sort ASC LIMIT 50";
 
     $stmt = $pdo->prepare($sql);
@@ -95,7 +90,6 @@ try {
 
 <div class="max-w-5xl mx-auto p-6">
 
-    <!-- Header -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -109,7 +103,6 @@ try {
     </div>
 
 
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -139,16 +132,12 @@ try {
 
     </nav>
 
-
-    <!-- Albums -->
     <div class="bg-white border rounded-lg p-5">
 
         <h2 class="text-xl font-semibold mb-4">
             Albums
         </h2>
 
-
-        <!-- Filters -->
         <form method="GET" class="mb-5">
 
             <div class="flex flex-wrap gap-2">
@@ -239,10 +228,6 @@ try {
             </div>
 
         </form>
-
-
-        <!-- Albums Table -->
-
         <div class="overflow-x-auto">
 
             <table class="w-full border-collapse">

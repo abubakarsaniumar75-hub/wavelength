@@ -64,7 +64,6 @@ try {
 
 <div class="max-w-5xl mx-auto p-6">
 
-    <!-- Header -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -76,9 +75,6 @@ try {
         </p>
 
     </div>
-
-
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -115,9 +111,6 @@ try {
         <h2 class="text-xl font-semibold mb-4">
             Playlists
         </h2>
-
-
-        <!-- Search -->
         <form method="GET" class="mb-5">
 
             <div class="flex gap-2">
@@ -147,9 +140,6 @@ try {
             </div>
 
         </form>
-
-
-        <!-- Playlist table -->
 
         <div class="overflow-x-auto">
 

@@ -7,7 +7,6 @@ $country = $_GET['country'] ?? '';
 
 try {
 
-    // Get countries for the dropdown
     $countryStmt = $pdo->query(
         "SELECT DISTINCT country
          FROM artists
@@ -17,20 +16,17 @@ try {
 
     $countries = $countryStmt->fetchAll();
 
-    // Build artists query
     $sql = "SELECT artist_id, name, country
             FROM artists
             WHERE 1=1";
 
     $params = [];
 
-    // Search by artist name
     if ($search !== '') {
         $sql .= " AND name LIKE ?";
         $params[] = "%$search%";
     }
 
-    // Filter by country
     if ($country !== '') {
         $sql .= " AND country IN (?)";
         $params[] = $country;
@@ -60,7 +56,6 @@ try {
 
     <title>Wavelength - Artists</title>
 
-    <!-- Small amount of Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -69,7 +64,6 @@ try {
 
 <div class="max-w-5xl mx-auto p-6">
 
-    <!-- Header -->
     <div class="bg-white border rounded-lg p-5 mb-5">
 
         <h1 class="text-2xl font-bold">
@@ -82,8 +76,6 @@ try {
 
     </div>
 
-
-    <!-- Navigation -->
     <nav class="bg-white border rounded-lg p-4 mb-5">
 
         <a href="index.php"
@@ -120,9 +112,6 @@ try {
         <h2 class="text-xl font-semibold mb-4">
             Artists
         </h2>
-
-
-        <!-- Search and Filter -->
 
         <form method="GET" class="mb-5">
 
@@ -177,7 +166,6 @@ try {
         </form>
 
 
-        <!-- Artists Table -->
 
         <div class="overflow-x-auto">
 
